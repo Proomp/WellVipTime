@@ -1,0 +1,22 @@
+# SQLITE for one local server, MYSQL or MARIADB for shared network storage. Remote engines require InnoDB. All database settings require restart.
+engine: SQLITE
+# Maximum remote SQL pool connections, 1-16. SQLite always uses one connection per plugin instance.
+pool-size: 4
+# SQL connection/busy/socket timeout in seconds, 1-30; also bounds LuckPerms group/track loading waits.
+timeout-seconds: 5
+sqlite:
+  # Simple .db filename inside plugins/WellVipTime, using letters/digits/_/-. Local disk only; never share SQLite across servers.
+  file: vipmanager.db
+mysql:
+  # Remote database hostname, IPv4 address, or bracketed IPv6 address. Do not include a port or credentials here.
+  host: localhost
+  # Remote database TCP port, 1-65535. Usually 3306.
+  port: 3306
+  # Database name: 1-48 lowercase letters/digits/_/-. Create this database and grant the configured user access.
+  database: vipmanager
+  # Database account used by the connection pool. Required even when SQLite is selected, but unused in SQLite mode.
+  username: vipmanager
+  # Database password. Keep this file private. Empty string is allowed if the database account supports it.
+  password: ''
+  # Verify TLS certificate and hostname when true; configure the CA in the JVM truststore. False disables connection encryption.
+  tls: true

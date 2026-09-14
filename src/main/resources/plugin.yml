@@ -1,0 +1,11 @@
+name: WellVipTime
+version: '${version}'
+main: com.wellsetups.wellviptime.WellVipTimePlugin
+authors: [WellSetups]
+api-version: '1.20'
+folia-supported: true
+description: Timed VIP ranks, personal menus and secure vouchers
+depend: [LuckPerms]
+softdepend: [PlaceholderAPI]
+libraries:
+${libraries}

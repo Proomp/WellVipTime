@@ -1,0 +1,30 @@
+personal:
+  # Enable /vipmenu (alias /myvip) for players with an active VIP balance. Choices persist per player; all new menus use 54 slots.
+  enabled: true
+  defaults:
+    # Default preference for new players: allow threshold bossbars and server-enabled live bossbars. Saved choices override this value.
+    bossbar: true
+    # Default preference for threshold and server-enabled live actionbars. Saved choices override this value.
+    actionbar: true
+    # Default preference for center-screen title/subtitle reminders. Saved choices override this value.
+    title: true
+vip-list:
+  # Open a paginated head-skin inventory for /viplist. False keeps the chat listing; console always receives chat.
+  enabled: true
+leaderboard:
+  # Open a paginated head-skin inventory for /vipleaderboard or /viptop. False keeps chat mode.
+  enabled: true
+browsing:
+  # Entries on each list/leaderboard page, 1-28. Personal VIP cards use 14 per page below the preference controls.
+  page-size: 28
+skins:
+  # Resolve head textures with the Bukkit profile API. Up to four asynchronous requests run at once with a bounded 256-request queue; unavailable skins use default heads.
+  enabled: true
+  # Minutes to reuse offline head profiles, 1-1440, with a maximum of 512 cached entries. 
+  cache-minutes: 30
+appearance:
+  # Non-air item Material used for decorative empty slots. Its translated name/lore are menu.filler in the language file.
+  filler: BLACK_STAINED_GLASS_PANE
+  bossbar: DRAGON_HEAD
+  actionbar: NAME_TAG
+  title: BELL

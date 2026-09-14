@@ -1,0 +1,245 @@
+# UTF-8 MiniMessage. Keep <placeholders>; prefix affects chat only.
+# owner-* labels describe who created the voucher; redemption restrictions are separate.
+prefix: ''
+error:
+  permission: <#FF7F8A>คุณไม่มีสิทธิ์ทำรายการนี้</#FF7F8A>
+  player-only: <#FF7F8A>คำสั่งนี้ต้องใช้ผู้เล่นที่ออนไลน์</#FF7F8A>
+  not-ready: <#FF7F8A>กำลังเริ่มระบบจัดเก็บ VIP โปรดรอสักครู่</#FF7F8A>
+  busy: <#FF7F8A>มีรายการรอมากเกินไป โปรดลองอีกครั้งภายหลัง</#FF7F8A>
+  internal: '<#FF7F8A>ไม่สามารถดำเนินการให้สำเร็จได้ • รหัสอ้างอิง: <reference></#FF7F8A>'
+  duration: '<#FF7F8A>ระยะเวลาไม่ถูกต้อง • <input> • 30d, 12h, 30m, 45s, 7d12h30m • สูงสุด: <maximum> วัน</#FF7F8A>'
+  vip: <#FF7F8A>ไม่รู้จักประเภท VIP • <input></#FF7F8A>
+  player: <#FF7F8A>ไม่พบผู้เล่นหรือชื่อไม่ชัดเจน โปรดใช้ UUID • <input></#FF7F8A>
+  no-vip: <#FF7F8A>ไม่พบ VIP ที่ใช้งานอยู่ • <player></#FF7F8A>
+  multiple: <#FF7F8A>มี VIP หลายยศที่ใช้งานอยู่ โปรดระบุประเภท • <types></#FF7F8A>
+  policy: <#FF7F8A>กฎการรวม VIP ไม่อนุญาตให้ทำรายการนี้</#FF7F8A>
+  amount: '<#FF7F8A>จำนวนคูปองไม่ถูกต้อง ต้องมีอย่างน้อย 1 • สูงสุด: <maximum></#FF7F8A>'
+  excessive-removal: <#FF7F8A>เวลาที่หักมากกว่าเวลา VIP ที่เหลือ</#FF7F8A>
+  freeze-range: <#FF7F8A>เวลา VIP อยู่นอกขอบเขตที่อนุญาตให้แช่แข็ง</#FF7F8A>
+  cooldown: <#FF7F8A>จะแช่แข็งได้อีกครั้งใน • <remaining></#FF7F8A>
+  world: <#FF7F8A>โลกนี้ปิดการแช่แข็ง VIP ไว้</#FF7F8A>
+  inventory: <#FF7F8A>โปรดเว้นที่ว่างในช่องเก็บของ</#FF7F8A>
+  vouchers-disabled: <#FF7F8A>ปิดการใช้คูปองไว้</#FF7F8A>
+  voucher-invalid: <#FF7F8A>คูปองนี้ไม่ถูกต้องหรือถูกแก้ไข</#FF7F8A>
+  voucher-version: <#FF7F8A>ไม่รองรับรูปแบบคูปองนี้</#FF7F8A>
+  voucher-used: <#FF7F8A>คูปองนี้ถูกใช้หรือยกเลิกแล้ว</#FF7F8A>
+  voucher-owner: <#FF7F8A>คูปองนี้เป็นของผู้เล่นอื่น</#FF7F8A>
+  reload: <#FF7F8A>การตั้งค่าไม่ถูกต้อง ยังคงใช้การตั้งค่าเดิม โปรดตรวจสอบคอนโซล</#FF7F8A>
+command:
+  usage: <#F6D365><usage></#F6D365>
+  viptime-usage: /<root> [player] | /<root> <give> <vip-id> <duration> <player> | /<root> <remove> <player> <vip-id> <duration> | /<root> <item> <vip-id>
+    <duration> [amount] | /<root> <item> <item_give> <vip-id> <duration> <player> [amount] | /<root> <item> <item_giveall> <vip-id> <duration> [amount]
+  freeze-usage: /<root> [player vip-id]
+  admin-usage: /<root> <reload> | /<root> <recover> [voucher-uuid] | /<root> <revoke> [voucher-uuid]
+list:
+  row: <#AAB7C4><rank>.</#AAB7C4> <#F3F6FA><player></#F3F6FA> <vip> <#F6D365><remaining></#F6D365>
+  header: '<#FDA085>ชุมชน VIP • หน้า: <page></#FDA085>'
+  leaderboard-header: '<#FDA085>อันดับ VIP • หน้า: <page></#FDA085>'
+  empty: <#F6D365>ไม่มีผลลัพธ์ในหน้านี้</#F6D365>
+  next: <#F6D365>หน้าถัดไป</#F6D365>
+  previous: <#F6D365>หน้าก่อนหน้า</#F6D365>
+  page-hover: '<#AAB7C4>หน้า: <page></#AAB7C4>'
+notification:
+  subtitle: <vip> <#AAB7C4>• <remaining></#AAB7C4>
+  login-header: <newline><#FDA085>สมาชิก VIP ของคุณ</#FDA085><newline><#AAB7C4>ยินดีต้อนรับกลับ, <player></#AAB7C4>
+  login-row: '  ◆ <vip> • <#7EE8B5><remaining></#7EE8B5><newline>     <#AAB7C4>วันหมดอายุ: <expiry></#AAB7C4>'
+  login-footer: <#536171>คลิกเพื่อต่ออายุ</#536171><newline>
+  chat: '<#F6D365>ยศ: <vip> • เวลาที่เหลือ: <remaining> • วันหมดอายุ: <expiry></#F6D365>'
+  actionbar: '<vip> • <#AAB7C4>เวลาที่เหลือ: <remaining></#AAB7C4>'
+  bossbar: '<vip> • เวลาที่เหลือ: <remaining>'
+  title: <#FDA085>วันหมดอายุ</#FDA085>
+display:
+  bossbar: <vip> • <remaining> • <percentage>%
+  actionbar: <vip> <#AAB7C4><progressbar> <remaining></#AAB7C4>
+  no-vip: <#AAB7C4>ไม่พบ VIP ที่ใช้งานอยู่</#AAB7C4>
+placeholder:
+  none: ''
+  'true': 'true'
+  'false': 'false'
+  progressbar: <#7EE8B5><filled></#7EE8B5><#536171><empty></#536171>
+duration:
+  separator: ' '
+  short:
+    day:
+      one: <value> วัน
+      many: <value> วัน
+    hour:
+      one: <value> ชั่วโมง
+      many: <value> ชั่วโมง
+    minute:
+      one: <value> นาที
+      many: <value> นาที
+    second:
+      one: <value> วินาที
+      many: <value> วินาที
+  long:
+    day:
+      one: <value> วัน
+      many: <value> วัน
+    hour:
+      one: <value> ชั่วโมง
+      many: <value> ชั่วโมง
+    minute:
+      one: <value> นาที
+      many: <value> นาที
+    second:
+      one: <value> วินาที
+      many: <value> วินาที
+discord:
+  title: <action>
+  description: 'ผู้ดำเนินการ: <actor> (<actor_uuid>)\nผู้เล่น: <player> (<uuid>)\nVIP: <vip>\nวินาที: <duration_seconds>\nวันหมดอายุเดิม: <previous>\nวันหมดอายุใหม่:
+    <expiry>\nคูปอง: <voucher>\nรหัสอ้างอิง: <reference>'
+menu:
+  filler:
+    name: ' '
+    lore: []
+  personal:
+    profile:
+      name: <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>โปรไฟล์ VIP ส่วนตัว</#536171>
+      - ''
+      - '<#AAB7C4>ยศ VIP ที่ใช้งานอยู่: <count></#AAB7C4>'
+      - <#AAB7C4>การแจ้งเตือน</#AAB7C4>
+      - <#536171>บันทึกการตั้งค่าอย่างถาวรแล้ว</#536171>
+    vip:
+      name: <vip>
+      lore:
+      - <#536171>ยศ VIP ที่ใช้งานอยู่</#536171>
+      - ''
+      - '<#7EE8B5>เวลาที่เหลือ: <remaining></#7EE8B5>'
+      - '<#AAB7C4>วันหมดอายุ: <expiry></#AAB7C4>'
+      - '<#F6D365>ความคืบหน้า: <percentage>%</#F6D365>'
+    inventory-title: <#FDA085>แผง VIP ของฉัน</#FDA085> • <page>
+    bossbar:
+      name: <#C9ACFF>แจ้งเตือนแถบบอส</#C9ACFF>
+      lore:
+      - <#AAB7C4>คลิกเพื่อสลับการแสดงผลนี้</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>ต้องเปิดการแสดงผลนี้ในการตั้งค่าเซิร์ฟเวอร์ด้วย</#536171>
+    actionbar:
+      name: <#C9ACFF>แจ้งเตือนแถบแอ็กชัน</#C9ACFF>
+      lore:
+      - <#AAB7C4>คลิกเพื่อสลับการแสดงผลนี้</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>ต้องเปิดการแสดงผลนี้ในการตั้งค่าเซิร์ฟเวอร์ด้วย</#536171>
+    title:
+      name: <#C9ACFF>แจ้งเตือนหัวเรื่อง</#C9ACFF>
+      lore:
+      - <#AAB7C4>คลิกเพื่อสลับการแสดงผลนี้</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>การเตือนในแชทยังคงใช้งานได้</#536171>
+  list:
+    entry:
+      name: <#536171>#<rank></#536171> <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>ยศ VIP ที่ใช้งานอยู่</#536171>
+      - ''
+      - '<#AAB7C4>ยศ: <vip></#AAB7C4>'
+      - '<#7EE8B5>เวลาที่เหลือ: <remaining></#7EE8B5>'
+      - '<#AAB7C4>วันหมดอายุ: <expiry></#AAB7C4>'
+      - '<#7DDDE8>สถานะ: <status></#7DDDE8>'
+    title: <#7DDDE8>ชุมชน VIP</#7DDDE8> • <page>
+  leaderboard:
+    entry:
+      name: <#F6D365><bold>#<rank></bold></#F6D365> <#F3F6FA><player></#F3F6FA>
+      lore:
+      - <#536171>อันดับ VIP</#536171>
+      - ''
+      - '<#AAB7C4>ยศ: <vip></#AAB7C4>'
+      - <#F6D365><ranking> • <score></#F6D365>
+      - '<#7EE8B5>เวลาที่เหลือ: <remaining></#7EE8B5>'
+      - '<#7DDDE8>สถานะ: <status></#7DDDE8>'
+      - <#536171>เวลา VIP ที่เหลือทั้งหมด</#536171>
+    title: <#FDA085>อันดับ VIP</#FDA085> • <page>
+  disabled: <#FF7F8A>เซิร์ฟเวอร์ปิดเมนูนี้ไว้</#FF7F8A>
+  enabled: เปิด — คลิกเพื่อปิด
+  disabled-state: ปิด — คลิกเพื่อเปิด
+  online: ออนไลน์
+  offline: ออฟไลน์
+  saved: <#7EE8B5>การแจ้งเตือน • บันทึกการตั้งค่าอย่างถาวรแล้ว</#7EE8B5>
+  ranking:
+    remaining: เวลา VIP ที่เหลือทั้งหมด
+    historical: เวลา VIP สะสมทั้งหมด
+    expiration: วันหมดอายุที่ช้าที่สุด
+  loading:
+    name: <#F6D365>กำลังโหลดข้อมูล VIP…</#F6D365>
+    lore:
+    - <#AAB7C4>กำลังโหลดข้อมูล VIP…</#AAB7C4>
+  empty:
+    name: <#F6D365>ไม่มีผลลัพธ์ในหน้านี้</#F6D365>
+    lore:
+    - <#AAB7C4>ไม่มีผลลัพธ์ในหน้านี้</#AAB7C4>
+  close:
+    name: <#F6D365>ปิด</#F6D365>
+    lore:
+    - <#AAB7C4>ปิด</#AAB7C4>
+  home:
+    name: <#F6D365>แผง VIP ของฉัน</#F6D365>
+    lore:
+    - <#AAB7C4>แผง VIP ของฉัน</#AAB7C4>
+  previous:
+    name: <#F6D365>หน้าก่อนหน้า</#F6D365>
+    lore:
+    - '<#AAB7C4>หน้า: <page></#AAB7C4>'
+  next:
+    name: <#F6D365>หน้าถัดไป</#F6D365>
+    lore:
+    - <#AAB7C4>หน้าถัดไป</#AAB7C4>
+  open-list:
+    name: <#F6D365>ชุมชน VIP</#F6D365>
+    lore:
+    - <#AAB7C4>ชุมชน VIP</#AAB7C4>
+  open-leaderboard:
+    name: <#F6D365>อันดับ VIP</#F6D365>
+    lore:
+    - <#AAB7C4>อันดับ VIP</#AAB7C4>
+vip:
+  info: '<#AAB7C4>ผู้เล่น: <player> • ยศ: <vip> • เวลาที่เหลือ: <remaining> • วันหมดอายุ: <expiry> • ความคืบหน้า: <percentage>%</#AAB7C4>'
+  hover: '<#F6D365>คลิกเพื่อต่ออายุ</#F6D365><newline>วัน: <days> • ชั่วโมง: <hours> • นาที: <minutes> • วินาที: <seconds>'
+  granted: '<#7EE8B5>มอบเวลา VIP แล้ว • ผู้เล่น: <player> • ยศ: <vip> • ระยะเวลา: <duration></#7EE8B5>'
+  removed: '<#7EE8B5>หักเวลา VIP แล้ว • ผู้เล่น: <player> • ยศ: <vip> • ระยะเวลา: <duration></#7EE8B5>'
+  frozen: '<#7EE8B5>แช่แข็งเวลา VIP แล้ว • ผู้เล่น: <player> • ยศ: <vip> • เวลาที่เหลือ: <remaining> • คูปอง: <voucher></#7EE8B5>'
+  expired: <#F6D365><vip> • VIP หมดอายุแล้ว</#F6D365>
+  none: ไม่มี
+voucher:
+  created: '<#7EE8B5>สร้างคูปองแล้ว • จำนวน: <amount> • รอช่องว่างในช่องเก็บของเพื่อส่งคูปอง</#7EE8B5>'
+  redeemed: '<#7EE8B5>ใช้คูปองแล้ว • ยศ: <vip> • ระยะเวลา: <duration></#7EE8B5>'
+  delivered: <#7EE8B5>ส่งคูปองแล้ว</#7EE8B5>
+  deferred: <#7EE8B5>รอช่องว่างในช่องเก็บของเพื่อส่งคูปอง</#7EE8B5>
+  recovered: <#F6D365>เข้าคิวกู้คืนแล้ว สำเนาทั้งหมดรวมกันใช้ได้เพียงครั้งเดียว • <voucher></#F6D365>
+  revoked: <#F6D365>ยกเลิกคูปองแล้ว สำเนาทั้งหมดใช้ไม่ได้ • <voucher></#F6D365>
+  name: <#FDA085><vip> • คูปอง</#FDA085>
+  lore:
+  - '<#AAB7C4>ระยะเวลา: <duration></#AAB7C4>'
+  - '<#AAB7C4>เจ้าของ: <owner></#AAB7C4>'
+  - '<#AAB7C4>ผู้ที่ใช้ได้: <redeemer></#AAB7C4>'
+  - <#F6D365>ใช้ไอเทมนี้เพื่อแลกคูปอง</#F6D365>
+  - '<#536171>ID: <voucher></#536171>'
+  transferable: ใครก็ได้
+  owner-admin: ผู้ดูแล
+  owner-console: คอนโซล
+  owner-player: <player>
+  gifted: <#7EE8B5>เข้าคิวคูปอง <amount> ใบสำหรับผู้เล่น <players> คนแล้ว</#7EE8B5>
+reload:
+  success: <#7EE8B5>โหลดการตั้งค่าใหม่แล้ว</#7EE8B5>
+  restart: <#F6D365>โหลดการตั้งค่าใหม่แล้ว • การเปลี่ยนคำสั่ง ฐานข้อมูล และเครือข่ายต้องเริ่มเซิร์ฟเวอร์ใหม่</#F6D365>
+gui:
+  title: <#FDA085>สมาชิก VIP ของคุณ</#FDA085>
+  url: <#F6D365>เปิดร้านค้า VIP</#F6D365>
+  renew:
+    name: <#7EE8B5>คลิกเพื่อต่ออายุ</#7EE8B5>
+    lore:
+    - <#AAB7C4>เปิดร้านค้า VIP</#AAB7C4>
+  close:
+    name: <#FF7F8A>ปิด</#FF7F8A>
+    lore:
+    - <#AAB7C4>ปิด</#AAB7C4>
+broadcast:
+  VIP_GRANTED: <#FDA085><player> • <vip> • มอบเวลา VIP แล้ว</#FDA085>
+  VIP_EXTENDED: <#FDA085><player> • <vip> • ต่ออายุ VIP แล้ว</#FDA085>
+  VIP_VOUCHER_REDEEMED: <#FDA085><player> • <vip> • ใช้คูปองแล้ว</#FDA085>
+  VIP_EXPIRED: <#FDA085><player> • <vip> • VIP หมดอายุแล้ว</#FDA085>

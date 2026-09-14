@@ -1,0 +1,245 @@
+# UTF-8 MiniMessage. Keep <placeholders>; prefix affects chat only.
+# owner-* labels describe who created the voucher; redemption restrictions are separate.
+prefix: ''
+error:
+  permission: <#FF7F8A>ليس لديك إذن للقيام بذلك.</#FF7F8A>
+  player-only: <#FF7F8A>يتطلب هذا الأمر لاعبًا متصلًا.</#FF7F8A>
+  not-ready: <#FF7F8A>جارٍ بدء تخزين VIP. يرجى الانتظار قليلًا.</#FF7F8A>
+  busy: <#FF7F8A>هناك عمليات كثيرة معلقة. حاول مجددًا بعد قليل.</#FF7F8A>
+  internal: '<#FF7F8A>تعذر إكمال العملية. • المرجع: <reference></#FF7F8A>'
+  duration: '<#FF7F8A>مدة غير صالحة. • <input> • 30d, 12h, 30m, 45s, 7d12h30m • الحد الأقصى: <maximum> أيام</#FF7F8A>'
+  vip: <#FF7F8A>نوع VIP غير معروف. • <input></#FF7F8A>
+  player: <#FF7F8A>لم يُعثر على اللاعب أو الاسم غير واضح. استخدم UUID. • <input></#FF7F8A>
+  no-vip: <#FF7F8A>لم يُعثر على VIP نشط. • <player></#FF7F8A>
+  multiple: <#FF7F8A>توجد رتب VIP نشطة متعددة. حدد النوع. • <types></#FF7F8A>
+  policy: <#FF7F8A>قاعدة تجميع VIP تمنع هذه العملية.</#FF7F8A>
+  amount: '<#FF7F8A>عدد القسائم غير صالح؛ الحد الأدنى 1. • الحد الأقصى: <maximum></#FF7F8A>'
+  excessive-removal: <#FF7F8A>الخصم يتجاوز وقت VIP المتبقي.</#FF7F8A>
+  freeze-range: <#FF7F8A>وقت VIP خارج حدود التجميد المسموح بها.</#FF7F8A>
+  cooldown: <#FF7F8A>يمكن التجميد مجددًا بعد • <remaining></#FF7F8A>
+  world: <#FF7F8A>التجميد معطّل في هذا العالم.</#FF7F8A>
+  inventory: <#FF7F8A>أفرغ مساحة في مخزونك.</#FF7F8A>
+  vouchers-disabled: <#FF7F8A>القسائم معطّلة.</#FF7F8A>
+  voucher-invalid: <#FF7F8A>هذه القسيمة غير صالحة أو تم تعديلها.</#FF7F8A>
+  voucher-version: <#FF7F8A>صيغة القسيمة هذه غير مدعومة.</#FF7F8A>
+  voucher-used: <#FF7F8A>استُخدمت هذه القسيمة أو أُلغيت بالفعل.</#FF7F8A>
+  voucher-owner: <#FF7F8A>هذه القسيمة تخص لاعبًا آخر.</#FF7F8A>
+  reload: <#FF7F8A>الإعدادات غير صالحة. تبقى الإعدادات السابقة فعالة؛ راجع وحدة التحكم.</#FF7F8A>
+command:
+  usage: <#F6D365><usage></#F6D365>
+  viptime-usage: /<root> [player] | /<root> <give> <vip-id> <duration> <player> | /<root> <remove> <player> <vip-id> <duration> | /<root> <item> <vip-id>
+    <duration> [amount] | /<root> <item> <item_give> <vip-id> <duration> <player> [amount] | /<root> <item> <item_giveall> <vip-id> <duration> [amount]
+  freeze-usage: /<root> [player vip-id]
+  admin-usage: /<root> <reload> | /<root> <recover> [voucher-uuid] | /<root> <revoke> [voucher-uuid]
+list:
+  row: <#AAB7C4><rank>.</#AAB7C4> <#F3F6FA><player></#F3F6FA> <vip> <#F6D365><remaining></#F6D365>
+  header: '<#FDA085>مجتمع VIP • الصفحة: <page></#FDA085>'
+  leaderboard-header: '<#FDA085>ترتيب VIP • الصفحة: <page></#FDA085>'
+  empty: <#F6D365>لا توجد نتائج في هذه الصفحة</#F6D365>
+  next: <#F6D365>الصفحة التالية</#F6D365>
+  previous: <#F6D365>الصفحة السابقة</#F6D365>
+  page-hover: '<#AAB7C4>الصفحة: <page></#AAB7C4>'
+notification:
+  subtitle: <vip> <#AAB7C4>• <remaining></#AAB7C4>
+  login-header: <newline><#FDA085>عضويتك في VIP</#FDA085><newline><#AAB7C4>مرحبًا بعودتك, <player></#AAB7C4>
+  login-row: '  ◆ <vip> • <#7EE8B5><remaining></#7EE8B5><newline>     <#AAB7C4>تاريخ الانتهاء: <expiry></#AAB7C4>'
+  login-footer: <#536171>انقر للتجديد</#536171><newline>
+  chat: '<#F6D365>الرتبة: <vip> • الوقت المتبقي: <remaining> • تاريخ الانتهاء: <expiry></#F6D365>'
+  actionbar: '<vip> • <#AAB7C4>الوقت المتبقي: <remaining></#AAB7C4>'
+  bossbar: '<vip> • الوقت المتبقي: <remaining>'
+  title: <#FDA085>تاريخ الانتهاء</#FDA085>
+display:
+  bossbar: <vip> • <remaining> • <percentage>%
+  actionbar: <vip> <#AAB7C4><progressbar> <remaining></#AAB7C4>
+  no-vip: <#AAB7C4>لم يُعثر على VIP نشط.</#AAB7C4>
+placeholder:
+  none: ''
+  'true': 'true'
+  'false': 'false'
+  progressbar: <#7EE8B5><filled></#7EE8B5><#536171><empty></#536171>
+duration:
+  separator: ' '
+  short:
+    day:
+      one: <value> يوم
+      many: <value> أيام
+    hour:
+      one: <value> ساعة
+      many: <value> ساعات
+    minute:
+      one: <value> دقيقة
+      many: <value> دقائق
+    second:
+      one: <value> ثانية
+      many: <value> ثوانٍ
+  long:
+    day:
+      one: <value> يوم
+      many: <value> أيام
+    hour:
+      one: <value> ساعة
+      many: <value> ساعات
+    minute:
+      one: <value> دقيقة
+      many: <value> دقائق
+    second:
+      one: <value> ثانية
+      many: <value> ثوانٍ
+discord:
+  title: <action>
+  description: 'المنفذ: <actor> (<actor_uuid>)\nاللاعب: <player> (<uuid>)\nVIP: <vip>\nثوانٍ: <duration_seconds>\nالانتهاء السابق: <previous>\nالانتهاء
+    الجديد: <expiry>\nالقسيمة: <voucher>\nالمرجع: <reference>'
+menu:
+  filler:
+    name: ' '
+    lore: []
+  personal:
+    profile:
+      name: <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>ملف VIP الشخصي</#536171>
+      - ''
+      - '<#AAB7C4>رتب VIP النشطة: <count></#AAB7C4>'
+      - <#AAB7C4>الإشعارات</#AAB7C4>
+      - <#536171>تم حفظ التفضيل بشكل دائم</#536171>
+    vip:
+      name: <vip>
+      lore:
+      - <#536171>رتب VIP النشطة</#536171>
+      - ''
+      - '<#7EE8B5>الوقت المتبقي: <remaining></#7EE8B5>'
+      - '<#AAB7C4>تاريخ الانتهاء: <expiry></#AAB7C4>'
+      - '<#F6D365>التقدم: <percentage>%</#F6D365>'
+    inventory-title: <#FDA085>لوحة VIP الخاصة بي</#FDA085> • <page>
+    bossbar:
+      name: <#C9ACFF>إشعارات شريط الزعيم</#C9ACFF>
+      lore:
+      - <#AAB7C4>انقر لتبديل هذا العرض</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>يجب تفعيل العرض في إعدادات الخادم أيضًا</#536171>
+    actionbar:
+      name: <#C9ACFF>إشعارات شريط الإجراءات</#C9ACFF>
+      lore:
+      - <#AAB7C4>انقر لتبديل هذا العرض</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>يجب تفعيل العرض في إعدادات الخادم أيضًا</#536171>
+    title:
+      name: <#C9ACFF>إشعارات العنوان</#C9ACFF>
+      lore:
+      - <#AAB7C4>انقر لتبديل هذا العرض</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>تبقى تذكيرات الدردشة متاحة</#536171>
+  list:
+    entry:
+      name: <#536171>#<rank></#536171> <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>رتب VIP النشطة</#536171>
+      - ''
+      - '<#AAB7C4>الرتبة: <vip></#AAB7C4>'
+      - '<#7EE8B5>الوقت المتبقي: <remaining></#7EE8B5>'
+      - '<#AAB7C4>تاريخ الانتهاء: <expiry></#AAB7C4>'
+      - '<#7DDDE8>الحالة: <status></#7DDDE8>'
+    title: <#7DDDE8>مجتمع VIP</#7DDDE8> • <page>
+  leaderboard:
+    entry:
+      name: <#F6D365><bold>#<rank></bold></#F6D365> <#F3F6FA><player></#F3F6FA>
+      lore:
+      - <#536171>ترتيب VIP</#536171>
+      - ''
+      - '<#AAB7C4>الرتبة: <vip></#AAB7C4>'
+      - <#F6D365><ranking> • <score></#F6D365>
+      - '<#7EE8B5>الوقت المتبقي: <remaining></#7EE8B5>'
+      - '<#7DDDE8>الحالة: <status></#7DDDE8>'
+      - <#536171>إجمالي وقت VIP المتبقي</#536171>
+    title: <#FDA085>ترتيب VIP</#FDA085> • <page>
+  disabled: <#FF7F8A>هذه القائمة معطّلة من الخادم</#FF7F8A>
+  enabled: مفعّل — انقر للتعطيل
+  disabled-state: معطّل — انقر للتفعيل
+  online: متصل
+  offline: غير متصل
+  saved: <#7EE8B5>الإشعارات • تم حفظ التفضيل بشكل دائم</#7EE8B5>
+  ranking:
+    remaining: إجمالي وقت VIP المتبقي
+    historical: إجمالي وقت VIP عبر المدة كلها
+    expiration: أبعد تاريخ انتهاء
+  loading:
+    name: <#F6D365>جارٍ تحميل بيانات VIP…</#F6D365>
+    lore:
+    - <#AAB7C4>جارٍ تحميل بيانات VIP…</#AAB7C4>
+  empty:
+    name: <#F6D365>لا توجد نتائج في هذه الصفحة</#F6D365>
+    lore:
+    - <#AAB7C4>لا توجد نتائج في هذه الصفحة</#AAB7C4>
+  close:
+    name: <#F6D365>إغلاق</#F6D365>
+    lore:
+    - <#AAB7C4>إغلاق</#AAB7C4>
+  home:
+    name: <#F6D365>لوحة VIP الخاصة بي</#F6D365>
+    lore:
+    - <#AAB7C4>لوحة VIP الخاصة بي</#AAB7C4>
+  previous:
+    name: <#F6D365>الصفحة السابقة</#F6D365>
+    lore:
+    - '<#AAB7C4>الصفحة: <page></#AAB7C4>'
+  next:
+    name: <#F6D365>الصفحة التالية</#F6D365>
+    lore:
+    - <#AAB7C4>الصفحة التالية</#AAB7C4>
+  open-list:
+    name: <#F6D365>مجتمع VIP</#F6D365>
+    lore:
+    - <#AAB7C4>مجتمع VIP</#AAB7C4>
+  open-leaderboard:
+    name: <#F6D365>ترتيب VIP</#F6D365>
+    lore:
+    - <#AAB7C4>ترتيب VIP</#AAB7C4>
+vip:
+  info: '<#AAB7C4>اللاعب: <player> • الرتبة: <vip> • الوقت المتبقي: <remaining> • تاريخ الانتهاء: <expiry> • التقدم: <percentage>%</#AAB7C4>'
+  hover: '<#F6D365>انقر للتجديد</#F6D365><newline>أيام: <days> • ساعات: <hours> • دقائق: <minutes> • ثوانٍ: <seconds>'
+  granted: '<#7EE8B5>تم منح وقت VIP • اللاعب: <player> • الرتبة: <vip> • المدة: <duration></#7EE8B5>'
+  removed: '<#7EE8B5>تم خصم وقت VIP • اللاعب: <player> • الرتبة: <vip> • المدة: <duration></#7EE8B5>'
+  frozen: '<#7EE8B5>تم تجميد وقت VIP • اللاعب: <player> • الرتبة: <vip> • الوقت المتبقي: <remaining> • القسيمة: <voucher></#7EE8B5>'
+  expired: <#F6D365><vip> • انتهت عضوية VIP</#F6D365>
+  none: لا يوجد
+voucher:
+  created: '<#7EE8B5>تم إنشاء القسائم • العدد: <amount> • التسليم ينتظر مساحة فارغة في المخزون</#7EE8B5>'
+  redeemed: '<#7EE8B5>تم استخدام القسيمة • الرتبة: <vip> • المدة: <duration></#7EE8B5>'
+  delivered: <#7EE8B5>تم تسليم القسيمة</#7EE8B5>
+  deferred: <#7EE8B5>التسليم ينتظر مساحة فارغة في المخزون</#7EE8B5>
+  recovered: <#F6D365>الاستعادة في الانتظار؛ جميع النسخ تشترك في استخدام واحد فقط • <voucher></#F6D365>
+  revoked: <#F6D365>تم إلغاء القسيمة؛ جميع النسخ غير صالحة • <voucher></#F6D365>
+  name: <#FDA085><vip> • القسيمة</#FDA085>
+  lore:
+  - '<#AAB7C4>المدة: <duration></#AAB7C4>'
+  - '<#AAB7C4>المالك: <owner></#AAB7C4>'
+  - '<#AAB7C4>يمكن استخدامه بواسطة: <redeemer></#AAB7C4>'
+  - <#F6D365>استخدم هذا العنصر لاسترداد القسيمة</#F6D365>
+  - '<#536171>ID: <voucher></#536171>'
+  transferable: أي شخص
+  owner-admin: المشرف
+  owner-console: وحدة التحكم
+  owner-player: <player>
+  gifted: <#7EE8B5>تمت إضافة <amount> قسيمة إلى الانتظار لعدد <players> من اللاعبين.</#7EE8B5>
+reload:
+  success: <#7EE8B5>تمت إعادة تحميل الإعدادات</#7EE8B5>
+  restart: <#F6D365>تمت إعادة تحميل الإعدادات • تغييرات الأوامر وقاعدة البيانات والشبكة تتطلب إعادة تشغيل</#F6D365>
+gui:
+  title: <#FDA085>عضويتك في VIP</#FDA085>
+  url: <#F6D365>فتح متجر VIP</#F6D365>
+  renew:
+    name: <#7EE8B5>انقر للتجديد</#7EE8B5>
+    lore:
+    - <#AAB7C4>فتح متجر VIP</#AAB7C4>
+  close:
+    name: <#FF7F8A>إغلاق</#FF7F8A>
+    lore:
+    - <#AAB7C4>إغلاق</#AAB7C4>
+broadcast:
+  VIP_GRANTED: <#FDA085><player> • <vip> • تم منح وقت VIP</#FDA085>
+  VIP_EXTENDED: <#FDA085><player> • <vip> • تم تمديد VIP</#FDA085>
+  VIP_VOUCHER_REDEEMED: <#FDA085><player> • <vip> • تم استخدام القسيمة</#FDA085>
+  VIP_EXPIRED: <#FDA085><player> • <vip> • انتهت عضوية VIP</#FDA085>

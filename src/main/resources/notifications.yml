@@ -1,0 +1,39 @@
+# Enable threshold-crossing reminders. Login summaries and final expiration messages have their own independent switches below.
+enabled: true
+# Show every active VIP rank and its remaining time in chat after login data loads, even when no expiry threshold has been crossed.
+login-summary: true
+# Missed thresholds on login: MISSED shows all crossed ones; NEAREST shows the smallest; IGNORE silently records them as seen. Independent of login-summary.
+login-mode: NEAREST
+# Lifetime of threshold titles and bossbars, 1-60 seconds.
+visible-seconds: 5
+# Send a final expiry chat message once per VIP revision. Login-mode IGNORE suppresses missed expiry messages on login.
+expiration-message: true
+sound:
+  # Namespaced Minecraft sound for SOUND thresholds, for example minecraft:block.note_block.pling.
+  key: minecraft:block.note_block.pling
+  # Notification sound volume, 0-200 percent. Zero is silent.
+  volume-percent: 100
+  # Notification sound pitch, 50-200 percent. 100 is normal pitch.
+  pitch-percent: 100
+# Named remaining-time thresholds. Each ID and seconds value must be unique. Empty mapping {} disables thresholds without disabling login-summary.
+thresholds:
+  seven-days:
+    # Remaining seconds at which this reminder becomes eligible, 1-2147483647. Must be unique across thresholds.
+    seconds: 604800
+    # Delivery channels: CHAT, ACTIONBAR, TITLE, BOSSBAR, GUI, SOUND. Player preferences can suppress the three visual channels.
+    channels: [CHAT]
+  three-days:
+    seconds: 259200
+    channels: [CHAT]
+  one-day:
+    seconds: 86400
+    channels: [CHAT, ACTIONBAR]
+  twelve-hours:
+    seconds: 43200
+    channels: [CHAT]
+  one-hour:
+    seconds: 3600
+    channels: [CHAT, TITLE]
+  ten-minutes:
+    seconds: 600
+    channels: [CHAT, BOSSBAR, SOUND]

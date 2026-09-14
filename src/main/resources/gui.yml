@@ -1,0 +1,34 @@
+# Enable the expiry/renewal pop-up. This is separate from personal, list and leaderboard menus in menus.yml.
+enabled: false
+# Inventory size for this renewal menu: 9, 18, 27, 36, 45 or 54 slots.
+size: 27
+# Language key for the renewal inventory title, supporting VIP placeholders.
+title-key: gui.title
+# Open this menu for near-expiry or expired VIPs on login when the player is not already viewing another inventory.
+open-on-login: true
+# True repeats on every eligible login; false opens only once per VIP revision.
+repeat-on-login: false
+# Close the inventory after a configured action. CLOSE always closes regardless of this value.
+close-after-action: true
+# Custom renewal menu buttons. IDs are arbitrary; each slot must be unique and inside the menu size.
+items:
+  renew:
+    # Zero-based inventory slot, from 0 through size-1. Must not overlap another configured button.
+    slot: 13
+    # Valid non-air item Material for this button, for example EMERALD or BARRIER.
+    material: EMERALD
+    # Language key containing this item display name; supports VIP and player placeholders.
+    name-key: gui.renew.name
+    # Language key containing this item lore list; each list element becomes a separate lore line.
+    lore-key: gui.renew.lore
+    # Button action: CLOSE, PLAYER_COMMAND, CONSOLE_COMMAND, OPEN_URL. Console actions run with console privileges.
+    action: PLAYER_COMMAND
+    # Command text or HTTPS URL for the selected action. Command substitutions: <player> and <uuid>. CLOSE may use an empty string.
+    value: 'store vip'
+  close:
+    slot: 22
+    material: BARRIER
+    name-key: gui.close.name
+    lore-key: gui.close.lore
+    action: CLOSE
+    value: ''

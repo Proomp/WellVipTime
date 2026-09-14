@@ -1,0 +1,216 @@
+# Enable the durable Discord audit outbox. Only selected event types are queued when this is true.
+enabled: false
+# Secret HTTPS Discord webhook URL, required when enabled. Never publish this value; invalid URL errors redact it.
+webhook-url: ''
+# Display username used for webhook messages.
+username: WellVipTime
+# Optional HTTPS avatar image URL. Empty string uses the webhook default avatar.
+avatar-url: ''
+# Embed accent as a decimal RGB integer, 0-16777215. 16755200 is gold.
+embed-color: 16755200
+# Include the audit timestamp in the Discord embed.
+timestamps: true
+# Text displayed at the bottom of each audit embed.
+footer: "WellVipTime • <server> • <reference>"
+# HTTP request timeout, 1-30 seconds. Failed requests remain queued for bounded retries.
+timeout-seconds: 5
+# Maximum webhook delivery attempts per audit, 1-5. Uncertain acknowledgements can produce duplicates.
+maximum-attempts: 3
+# Audit action names to send. Remove an event to stop queuing new messages for it; existing queued audits may still deliver.
+events: [VIP_GRANTED, VIP_EXTENDED, VIP_TIME_REMOVED, VIP_FROZEN, VIP_VOUCHER_CREATED, VIP_VOUCHER_REDEEMED, VIP_EXPIRED, VIP_REVOKED, CONFIG_RELOADED]
+
+# Per-event Discord Markdown embeds. Colors are decimal RGB; at most 8 fields each.
+# Tokens: <actor>, <actor_uuid>, <player>, <uuid>, <vip>, <duration>, <duration_seconds>,
+# <previous>, <expiry>, <voucher>, <reference>, <action>, <server>. Zero/absent dates show —.
+# Text is bounded to Discord limits; mentions are disabled. Empty fields: {} hides fields.
+templates:
+  VIP_GRANTED:
+    title: ✦ VIP activated
+    description: '**<player>** received the **<vip>** rank. A new membership has begun.'
+    color: 8317109
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Duration
+        value: <duration>
+        inline: true
+      expiry:
+        name: Expires
+        value: <expiry>
+        inline: false
+  VIP_EXTENDED:
+    title: ✦ VIP extended
+    description: More time to enjoy the perks. **<player>** renewed **<vip>**.
+    color: 8248808
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Added time
+        value: <duration>
+        inline: true
+      expiry:
+        name: Expires
+        value: <expiry>
+        inline: false
+  VIP_TIME_REMOVED:
+    title: − VIP time adjusted
+    description: An administrator removed time from **<player>**’s **<vip>** membership.
+    color: 16758892
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Removed time
+        value: <duration>
+        inline: true
+      expiry:
+        name: Expires
+        value: <expiry>
+        inline: false
+  VIP_FROZEN:
+    title: ❄ VIP time frozen
+    description: '**<player>**’s remaining **<vip>** time is now stored in a signed voucher.'
+    color: 10993663
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Frozen time
+        value: <duration>
+        inline: true
+      voucher:
+        name: Voucher ID
+        value: <voucher>
+        inline: false
+  VIP_VOUCHER_CREATED:
+    title: 🎟 VIP voucher created
+    description: A new **<vip>** voucher was queued for **<player>**. It can be redeemed once.
+    color: 16175973
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Voucher value
+        value: <duration>
+        inline: true
+      voucher:
+        name: Voucher ID
+        value: <voucher>
+        inline: false
+  VIP_VOUCHER_REDEEMED:
+    title: ✓ VIP voucher redeemed
+    description: '**<player>** used a voucher to activate or extend **<vip>**.'
+    color: 8317109
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Redeemed time
+        value: <duration>
+        inline: true
+      expiry:
+        name: Expires
+        value: <expiry>
+        inline: false
+  VIP_EXPIRED:
+    title: ⌛ VIP membership ended
+    description: The **<vip>** membership for **<player>** has reached its expiry time.
+    color: 16744330
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Ended at
+        value: <previous>
+        inline: true
+  VIP_REVOKED:
+    title: ⊘ VIP voucher revoked
+    description: An issued **<vip>** voucher was revoked. **All copies are now invalid.**
+    color: 16744330
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Voucher ID
+        value: <voucher>
+        inline: true
+  CONFIG_RELOADED:
+    title: ↻ Configuration updated
+    description: The validated configuration is now active. Restart-only settings keep their current values.
+    color: 13217023
+    fields:
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Server
+        value: <server>
+        inline: true
+  VIP_VOUCHER_RECOVERED:
+    title: ↺ VIP voucher recovered
+    description: An issued **<vip>** voucher was queued for recovery. Copies share the same single-use ID.
+    color: 16175973
+    fields:
+      player:
+        name: Player
+        value: <player>
+        inline: true
+      actor:
+        name: Performed by
+        value: <actor>
+        inline: true
+      value:
+        name: Voucher ID
+        value: <voucher>
+        inline: true

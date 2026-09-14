@@ -1,0 +1,245 @@
+# UTF-8 MiniMessage. Keep <placeholders>; prefix affects chat only.
+# owner-* labels describe who created the voucher; redemption restrictions are separate.
+prefix: ''
+error:
+  permission: <#FF7F8A>Sinulla ei ole tähän oikeutta.</#FF7F8A>
+  player-only: <#FF7F8A>Komento vaatii paikalla olevan pelaajan.</#FF7F8A>
+  not-ready: <#FF7F8A>VIP-tallennus käynnistyy. Odota hetki.</#FF7F8A>
+  busy: <#FF7F8A>Liikaa tehtäviä jonossa. Yritä pian uudelleen.</#FF7F8A>
+  internal: '<#FF7F8A>Toiminto epäonnistui. • Viite: <reference></#FF7F8A>'
+  duration: '<#FF7F8A>Virheellinen kesto. • <input> • 30d, 12h, 30m, 45s, 7d12h30m • Enintään: <maximum> päivää</#FF7F8A>'
+  vip: <#FF7F8A>Tuntematon VIP-tyyppi. • <input></#FF7F8A>
+  player: <#FF7F8A>Pelaajaa ei löydy tai nimi ei ole yksilöllinen. Käytä UUID-tunnusta. • <input></#FF7F8A>
+  no-vip: <#FF7F8A>Aktiivista VIP-jäsenyyttä ei löytynyt. • <player></#FF7F8A>
+  multiple: <#FF7F8A>Useita VIP-arvoja aktiivisena. Valitse tyyppi. • <types></#FF7F8A>
+  policy: <#FF7F8A>VIP-yhdistämissääntö estää toiminnon.</#FF7F8A>
+  amount: '<#FF7F8A>Virheellinen kuponkimäärä; vähintään 1. • Enintään: <maximum></#FF7F8A>'
+  excessive-removal: <#FF7F8A>Vähennys ylittää jäljellä olevan VIP-ajan.</#FF7F8A>
+  freeze-range: <#FF7F8A>VIP-aika ei ole jäädytysrajojen sisällä.</#FF7F8A>
+  cooldown: <#FF7F8A>Uusi jäädytys mahdollinen ajan kuluttua • <remaining></#FF7F8A>
+  world: <#FF7F8A>Jäädytys on poistettu käytöstä tässä maailmassa.</#FF7F8A>
+  inventory: <#FF7F8A>Vapauta tilaa tavaraluettelostasi.</#FF7F8A>
+  vouchers-disabled: <#FF7F8A>Kupongit on poistettu käytöstä.</#FF7F8A>
+  voucher-invalid: <#FF7F8A>Kuponki on virheellinen tai muutettu.</#FF7F8A>
+  voucher-version: <#FF7F8A>Kuponkimuotoa ei tueta.</#FF7F8A>
+  voucher-used: <#FF7F8A>Kuponki on jo lunastettu tai mitätöity.</#FF7F8A>
+  voucher-owner: <#FF7F8A>Kuponki kuuluu toiselle pelaajalle.</#FF7F8A>
+  reload: <#FF7F8A>Virheelliset asetukset. Edelliset asetukset säilyvät; tarkista konsoli.</#FF7F8A>
+command:
+  usage: <#F6D365><usage></#F6D365>
+  viptime-usage: /<root> [player] | /<root> <give> <vip-id> <duration> <player> | /<root> <remove> <player> <vip-id> <duration> | /<root> <item> <vip-id>
+    <duration> [amount] | /<root> <item> <item_give> <vip-id> <duration> <player> [amount] | /<root> <item> <item_giveall> <vip-id> <duration> [amount]
+  freeze-usage: /<root> [player vip-id]
+  admin-usage: /<root> <reload> | /<root> <recover> [voucher-uuid] | /<root> <revoke> [voucher-uuid]
+list:
+  row: <#AAB7C4><rank>.</#AAB7C4> <#F3F6FA><player></#F3F6FA> <vip> <#F6D365><remaining></#F6D365>
+  header: '<#FDA085>VIP-yhteisö • Sivu: <page></#FDA085>'
+  leaderboard-header: '<#FDA085>VIP-tulostaulukko • Sivu: <page></#FDA085>'
+  empty: <#F6D365>Tällä sivulla ei ole tuloksia</#F6D365>
+  next: <#F6D365>Seuraava sivu</#F6D365>
+  previous: <#F6D365>Edellinen sivu</#F6D365>
+  page-hover: '<#AAB7C4>Sivu: <page></#AAB7C4>'
+notification:
+  subtitle: <vip> <#AAB7C4>• <remaining></#AAB7C4>
+  login-header: <newline><#FDA085>VIP-jäsenyytesi</#FDA085><newline><#AAB7C4>Tervetuloa takaisin, <player></#AAB7C4>
+  login-row: '  ◆ <vip> • <#7EE8B5><remaining></#7EE8B5><newline>     <#AAB7C4>Päättyy: <expiry></#AAB7C4>'
+  login-footer: <#536171>Uudista napsauttamalla</#536171><newline>
+  chat: '<#F6D365>Arvo: <vip> • Aikaa jäljellä: <remaining> • Päättyy: <expiry></#F6D365>'
+  actionbar: '<vip> • <#AAB7C4>Aikaa jäljellä: <remaining></#AAB7C4>'
+  bossbar: '<vip> • Aikaa jäljellä: <remaining>'
+  title: <#FDA085>Päättyy</#FDA085>
+display:
+  bossbar: <vip> • <remaining> • <percentage>%
+  actionbar: <vip> <#AAB7C4><progressbar> <remaining></#AAB7C4>
+  no-vip: <#AAB7C4>Aktiivista VIP-jäsenyyttä ei löytynyt.</#AAB7C4>
+placeholder:
+  none: ''
+  'true': 'true'
+  'false': 'false'
+  progressbar: <#7EE8B5><filled></#7EE8B5><#536171><empty></#536171>
+duration:
+  separator: ' '
+  short:
+    day:
+      one: <value> päivä
+      many: <value> päivää
+    hour:
+      one: <value> tunti
+      many: <value> tuntia
+    minute:
+      one: <value> minuutti
+      many: <value> minuuttia
+    second:
+      one: <value> sekunti
+      many: <value> sekuntia
+  long:
+    day:
+      one: <value> päivä
+      many: <value> päivää
+    hour:
+      one: <value> tunti
+      many: <value> tuntia
+    minute:
+      one: <value> minuutti
+      many: <value> minuuttia
+    second:
+      one: <value> sekunti
+      many: <value> sekuntia
+discord:
+  title: <action>
+  description: 'Suorittaja: <actor> (<actor_uuid>)\nPelaaja: <player> (<uuid>)\nVIP: <vip>\nsekuntia: <duration_seconds>\nEdellinen päättymisaika: <previous>\nUusi
+    päättymisaika: <expiry>\nKuponki: <voucher>\nViite: <reference>'
+menu:
+  filler:
+    name: ' '
+    lore: []
+  personal:
+    profile:
+      name: <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>Oma VIP-profiili</#536171>
+      - ''
+      - '<#AAB7C4>Aktiiviset VIP-arvot: <count></#AAB7C4>'
+      - <#AAB7C4>Ilmoitukset</#AAB7C4>
+      - <#536171>Valinta tallennettu pysyvästi</#536171>
+    vip:
+      name: <vip>
+      lore:
+      - <#536171>Aktiiviset VIP-arvot</#536171>
+      - ''
+      - '<#7EE8B5>Aikaa jäljellä: <remaining></#7EE8B5>'
+      - '<#AAB7C4>Päättyy: <expiry></#AAB7C4>'
+      - '<#F6D365>Edistyminen: <percentage>%</#F6D365>'
+    inventory-title: <#FDA085>Oma VIP-valikko</#FDA085> • <page>
+    bossbar:
+      name: <#C9ACFF>Pomopalkin ilmoitukset</#C9ACFF>
+      lore:
+      - <#AAB7C4>Vaihda näyttötapaa napsauttamalla</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>Näytön on oltava käytössä myös palvelimella</#536171>
+    actionbar:
+      name: <#C9ACFF>Toimintopalkin ilmoitukset</#C9ACFF>
+      lore:
+      - <#AAB7C4>Vaihda näyttötapaa napsauttamalla</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>Näytön on oltava käytössä myös palvelimella</#536171>
+    title:
+      name: <#C9ACFF>Otsikkoilmoitukset</#C9ACFF>
+      lore:
+      - <#AAB7C4>Vaihda näyttötapaa napsauttamalla</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>Chat-muistutukset säilyvät käytössä</#536171>
+  list:
+    entry:
+      name: <#536171>#<rank></#536171> <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>Aktiiviset VIP-arvot</#536171>
+      - ''
+      - '<#AAB7C4>Arvo: <vip></#AAB7C4>'
+      - '<#7EE8B5>Aikaa jäljellä: <remaining></#7EE8B5>'
+      - '<#AAB7C4>Päättyy: <expiry></#AAB7C4>'
+      - '<#7DDDE8>Tila: <status></#7DDDE8>'
+    title: <#7DDDE8>VIP-yhteisö</#7DDDE8> • <page>
+  leaderboard:
+    entry:
+      name: <#F6D365><bold>#<rank></bold></#F6D365> <#F3F6FA><player></#F3F6FA>
+      lore:
+      - <#536171>VIP-tulostaulukko</#536171>
+      - ''
+      - '<#AAB7C4>Arvo: <vip></#AAB7C4>'
+      - <#F6D365><ranking> • <score></#F6D365>
+      - '<#7EE8B5>Aikaa jäljellä: <remaining></#7EE8B5>'
+      - '<#7DDDE8>Tila: <status></#7DDDE8>'
+      - <#536171>VIP-aikaa jäljellä yhteensä</#536171>
+    title: <#FDA085>VIP-tulostaulukko</#FDA085> • <page>
+  disabled: <#FF7F8A>Palvelin on poistanut tämän valikon käytöstä</#FF7F8A>
+  enabled: PÄÄLLÄ — poista käytöstä napsauttamalla
+  disabled-state: POIS — ota käyttöön napsauttamalla
+  online: Paikalla
+  offline: Poissa
+  saved: <#7EE8B5>Ilmoitukset • Valinta tallennettu pysyvästi</#7EE8B5>
+  ranking:
+    remaining: VIP-aikaa jäljellä yhteensä
+    historical: VIP-aika koko ajalta
+    expiration: Myöhäisin päättymisaika
+  loading:
+    name: <#F6D365>Ladataan VIP-tietoja…</#F6D365>
+    lore:
+    - <#AAB7C4>Ladataan VIP-tietoja…</#AAB7C4>
+  empty:
+    name: <#F6D365>Tällä sivulla ei ole tuloksia</#F6D365>
+    lore:
+    - <#AAB7C4>Tällä sivulla ei ole tuloksia</#AAB7C4>
+  close:
+    name: <#F6D365>Sulje</#F6D365>
+    lore:
+    - <#AAB7C4>Sulje</#AAB7C4>
+  home:
+    name: <#F6D365>Oma VIP-valikko</#F6D365>
+    lore:
+    - <#AAB7C4>Oma VIP-valikko</#AAB7C4>
+  previous:
+    name: <#F6D365>Edellinen sivu</#F6D365>
+    lore:
+    - '<#AAB7C4>Sivu: <page></#AAB7C4>'
+  next:
+    name: <#F6D365>Seuraava sivu</#F6D365>
+    lore:
+    - <#AAB7C4>Seuraava sivu</#AAB7C4>
+  open-list:
+    name: <#F6D365>VIP-yhteisö</#F6D365>
+    lore:
+    - <#AAB7C4>VIP-yhteisö</#AAB7C4>
+  open-leaderboard:
+    name: <#F6D365>VIP-tulostaulukko</#F6D365>
+    lore:
+    - <#AAB7C4>VIP-tulostaulukko</#AAB7C4>
+vip:
+  info: '<#AAB7C4>Pelaaja: <player> • Arvo: <vip> • Aikaa jäljellä: <remaining> • Päättyy: <expiry> • Edistyminen: <percentage>%</#AAB7C4>'
+  hover: '<#F6D365>Uudista napsauttamalla</#F6D365><newline>päivää: <days> • tuntia: <hours> • minuuttia: <minutes> • sekuntia: <seconds>'
+  granted: '<#7EE8B5>VIP-aikaa myönnetty • Pelaaja: <player> • Arvo: <vip> • Kesto: <duration></#7EE8B5>'
+  removed: '<#7EE8B5>VIP-aikaa poistettu • Pelaaja: <player> • Arvo: <vip> • Kesto: <duration></#7EE8B5>'
+  frozen: '<#7EE8B5>VIP-aika jäädytetty • Pelaaja: <player> • Arvo: <vip> • Aikaa jäljellä: <remaining> • Kuponki: <voucher></#7EE8B5>'
+  expired: <#F6D365><vip> • VIP päättynyt</#F6D365>
+  none: Ei mitään
+voucher:
+  created: '<#7EE8B5>Kupongit luotu • Määrä: <amount> • Toimitus odottaa vapaata tavarapaikkaa</#7EE8B5>'
+  redeemed: '<#7EE8B5>Kuponki lunastettu • Arvo: <vip> • Kesto: <duration></#7EE8B5>'
+  delivered: <#7EE8B5>Kuponki toimitettu</#7EE8B5>
+  deferred: <#7EE8B5>Toimitus odottaa vapaata tavarapaikkaa</#7EE8B5>
+  recovered: <#F6D365>Palautus jonossa; kaikki kopiot voi lunastaa yhteensä vain kerran • <voucher></#F6D365>
+  revoked: <#F6D365>Kuponki mitätöity; kaikki kopiot ovat kelvottomia • <voucher></#F6D365>
+  name: <#FDA085><vip> • Kuponki</#FDA085>
+  lore:
+  - '<#AAB7C4>Kesto: <duration></#AAB7C4>'
+  - '<#AAB7C4>Omistaja: <owner></#AAB7C4>'
+  - '<#AAB7C4>Lunastaja: <redeemer></#AAB7C4>'
+  - <#F6D365>Lunasta käyttämällä tätä esinettä</#F6D365>
+  - '<#536171>ID: <voucher></#536171>'
+  transferable: Kuka tahansa
+  owner-admin: Ylläpitäjä
+  owner-console: Konsoli
+  owner-player: <player>
+  gifted: <#7EE8B5>Jonossa <amount> kuponkia <players> pelaajalle.</#7EE8B5>
+reload:
+  success: <#7EE8B5>Asetukset ladattu uudelleen</#7EE8B5>
+  restart: <#F6D365>Asetukset ladattu uudelleen • Komento-, tietokanta- ja verkkomuutokset vaativat uudelleenkäynnistyksen</#F6D365>
+gui:
+  title: <#FDA085>VIP-jäsenyytesi</#FDA085>
+  url: <#F6D365>Avaa VIP-kauppa</#F6D365>
+  renew:
+    name: <#7EE8B5>Uudista napsauttamalla</#7EE8B5>
+    lore:
+    - <#AAB7C4>Avaa VIP-kauppa</#AAB7C4>
+  close:
+    name: <#FF7F8A>Sulje</#FF7F8A>
+    lore:
+    - <#AAB7C4>Sulje</#AAB7C4>
+broadcast:
+  VIP_GRANTED: <#FDA085><player> • <vip> • VIP-aikaa myönnetty</#FDA085>
+  VIP_EXTENDED: <#FDA085><player> • <vip> • VIP-aikaa jatkettu</#FDA085>
+  VIP_VOUCHER_REDEEMED: <#FDA085><player> • <vip> • Kuponki lunastettu</#FDA085>
+  VIP_EXPIRED: <#FDA085><player> • <vip> • VIP päättynyt</#FDA085>

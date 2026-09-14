@@ -1,0 +1,87 @@
+# All command label, alias and permission changes require a server restart.
+vipmenu:
+  # Command label without /. Labels must be unique within their root/subcommand scope; lowercase letters/digits/_/-, at most 48 characters.
+  name: vipmenu
+  # Additional labels for the same command, without /. Empty list creates no aliases. Must be unique within the same command scope.
+  aliases: [myvip]
+  # Permission checked by command dispatch and tab completion. Explicit grants are required for administrative operations.
+  permission: vipmanager.command.menu
+  # Plain-text help description registered with Bukkit for this logical command.
+  description: Manage personal VIP notifications
+viptime:
+  name: viptime
+  aliases: [vtime]
+  permission: vipmanager.command.viptime
+  description: Show VIP time
+viptime-others:
+  name: inspect
+  aliases: []
+  permission: vipmanager.command.viptime.others
+  description: Inspect another player
+viptime-give:
+  name: give
+  aliases: [add]
+  permission: vipmanager.command.give
+  description: Grant VIP time
+viptime-remove:
+  name: remove
+  aliases: []
+  permission: vipmanager.command.remove
+  description: Remove VIP time
+viptime-item:
+  name: item
+  aliases: []
+  permission: vipmanager.command.item
+  description: Create secure vouchers
+vipfreeze:
+  name: vipfreeze
+  aliases: []
+  permission: vipmanager.command.freeze
+  description: Freeze VIP into a voucher
+vipfreeze-others:
+  name: target
+  aliases: []
+  permission: vipmanager.command.freeze.others
+  description: Freeze another player's VIP
+vipleaderboard:
+  name: vipleaderboard
+  aliases: [viptop]
+  permission: vipmanager.command.leaderboard
+  description: Show VIP leaderboard
+viplist:
+  name: viplist
+  aliases: []
+  permission: vipmanager.command.list
+  description: List active VIP users
+vipadmin:
+  name: vipadmin
+  aliases: []
+  permission: vipmanager.admin.reload
+  description: VIP administration
+vipadmin-reload:
+  name: reload
+  aliases: []
+  permission: vipmanager.admin.reload
+  description: Reload configuration atomically
+vipadmin-recover:
+  name: recover
+  aliases: []
+  permission: vipmanager.admin.recover
+  description: Recover an issued voucher to your inventory after inspecting the audit trail
+vipadmin-revoke:
+  name: revoke
+  aliases: []
+  permission: vipmanager.admin.revoke
+  description: Revoke all copies of an issued voucher
+
+# Item distribution queues durable delivery; giveall selects currently online players.
+viptime-item-give:
+  name: give
+  aliases: []
+  permission: vipmanager.command.item.give
+  description: Give VIP vouchers to a named player, including known offline players
+viptime-item-giveall:
+  name: giveall
+  aliases: []
+  permission: vipmanager.command.item.giveall
+  description: Give VIP vouchers to every currently online player

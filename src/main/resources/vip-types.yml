@@ -1,0 +1,32 @@
+sync:
+  # Discover LuckPerms VIP definitions at startup, reload and timed refresh. Manual entries below override generated definitions. No player balances are imported.
+  enabled: true
+  # Case-sensitive lowercase group globs when track is empty: * matches any text, ? matches one character. Use ['*'] to include all groups except exclusions.
+  include: ['vip*', '*vip', 'mvip*']
+  # Exact LuckPerms group names never automatically discovered, even if they match a pattern or track. Manual definitions can still map these groups.
+  exclude: [default, owner, admin, moderator, helper]
+  # Optional existing LuckPerms track name. When nonempty, its member groups replace include-pattern matching; exclusions still apply.
+  track: ''
+  # Seconds between automatic discovery refreshes, 10-3600. Changes also apply at startup and /vipadmin reload.
+  refresh-seconds: 60
+  # MiniMessage format for generated rank names. <group> becomes the LuckPerms group name; per-rank manual display-name overrides this.
+  display-format: '<gradient:#F6D365:#FDA085><group></gradient>'
+  # Priority for groups without LuckPerms weight, 0-100000. Existing group weights are used and clamped to that range.
+  default-priority: 10
+# Optional manual overrides keyed by stable VIP ID. Use vip-types: {} for discovery only. Generated definitions are saved to vip-types.generated.yml.
+vip-types:
+  vip:
+    # MiniMessage label shown for this VIP type. This manual value overrides the generated name.
+    display-name: '<yellow>VIP</yellow>'
+    # Existing or auto-created LuckPerms group mapped to this stable VIP ID. Use a lowercase name, 1-48 letters/digits/_/-.
+    luckperms-group: vip
+    # Manual policy priority, 0-100000. Higher ranks win PRIORITY_BASED stacking; this overrides discovered LuckPerms weight.
+    priority: 10
+  vip-plus:
+    display-name: '<gradient:#FFD700:#FF8800>VIP+</gradient>'
+    luckperms-group: vipplus
+    priority: 20
+  mvip:
+    display-name: '<aqua>MVIP</aqua>'
+    luckperms-group: mvip
+    priority: 30

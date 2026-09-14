@@ -1,0 +1,148 @@
+# Configuration format version. Keep 1; this is independent of the database schema version.
+config-version: 1
+# Shared VIP context identity, 1-48 lowercase letters/digits/_/-. All backends sharing SQL must also share this ID, signing key and LuckPerms storage. Restart required.
+network-id: default
+# Unique name for this backend, 1-48 lowercase letters/digits/_/-. Used in startup diagnostics. Restart required.
+server-id: survival
+execution:
+  # Number of bounded background SQL workers, 1-16. Increase only when the database can handle more parallel work. Restart required.
+  workers: 2
+  # Maximum pending background jobs, 16-10000. When full, commands report busy instead of growing memory without limit. Restart required.
+  queue-size: 256
+  # Seconds to wait for accepted background jobs during shutdown, 1-30. Restart required.
+  shutdown-seconds: 10
+expiration:
+  # Seconds between expiry, permission reconciliation and online notification batches, 1-300. Lower values react sooner but increase SQL work.
+  check-seconds: 5
+  # Maximum players/records considered per background batch, 1-1000. Online players rotate through batches fairly.
+  batch-size: 100
+policies:
+  # Maximum duration accepted by grant/voucher commands, 1-36500 days. Compound durations must also fit this limit.
+  maximum-duration-days: 3650
+  # Allow concurrent VIP types for a player. If false, different-type cannot be PARALLEL.
+  allow-multiple-vip-types: true
+  # EXTEND adds to remaining time; REPLACE starts a new duration; REJECT refuses another active grant of the same type.
+  same-type: EXTEND
+  # PARALLEL keeps separate ranks; REPLACE ends other ranks; REJECT refuses; PRIORITY_BASED replaces only strictly lower priority ranks.
+  different-type: PARALLEL
+  # CLAMP removes at most the remaining time; REJECT refuses a removal larger than the current balance.
+  excess-removal: CLAMP
+listing:
+  # Rows per chat page for console or disabled GUI modes, 1-50. Inventory menus use menus.yml browsing.page-size.
+  page-size: 10
+  # Maximum ranked players exposed by leaderboard pagination, 1-10000; applies to chat and GUI.
+  maximum-leaderboard-size: 1000
+  # REMAINING sums active remaining time; HISTORICAL sums lifetime credited VIP time; EXPIRATION ranks latest expiry. GUI score labels follow this mode.
+  ranking: REMAINING
+  # VIP list ordering: EXPIRATION (latest first), NAME (alphabetical), or TYPE. Independent of leaderboard ranking.
+  sort: EXPIRATION
+  # Cache identical listing queries for 0-300 seconds; 0 disables caching. Local VIP changes invalidate it immediately.
+  cache-seconds: 5
+  # Players with this permission are excluded from the public leaderboard after their online status refresh. Does not hide the separate VIP list.
+  hidden-permission: vipmanager.leaderboard.hidden
+  # Canonical UUID strings excluded from the leaderboard even while offline. Empty list hides nobody explicitly.
+  hidden-players: []
+luckperms:
+  # Queue a full audit of persisted players after startup to repair plugin-owned LuckPerms inheritance. Restart required.
+  reconcile-startup: true
+  # Create missing mapped LuckPerms groups as EMPTY groups. No perks are granted automatically. False requires all mapped groups to exist.
+  create-missing-groups: true
+language:
+  # Language filename without .yml used for console and unmatched player locales. That file must exist in languages/.
+  default: en_US
+  # Existing language filename used when a translation is absent. New missing keys ultimately fall back to bundled English.
+  fallback: en_US
+  # Choose player language from the client locale when true; false always uses language.default.
+  automatic-client-locale: true
+  locale-mapping:
+    # Map client locale en_us to an existing language filename without .yml. Add other client locale keys here.
+    en_us: en_US
+display:
+  # IANA timezone for expiry dates, for example UTC or Europe/Istanbul. Remaining durations always use absolute elapsed time.
+  timezone: UTC
+  # Java DateTimeFormatter pattern for displayed dates. Example yyyy-MM-dd HH:mm:ss z includes the timezone.
+  date-pattern: 'yyyy-MM-dd HH:mm:ss z'
+  # short uses compact units such as 2d 3h; long uses translated singular/plural units such as 2 days 3 hours.
+  duration-style: short
+  # Maximum nonzero duration units shown, 1-4, from days down to seconds.
+  duration-units: 4
+  # Seconds between live bossbar/actionbar refreshes, 1-300. These use cached VIP data, not a SQL query per frame.
+  refresh-seconds: 5
+  progress:
+    # Number of characters in text progress bars, 1-100.
+    length: 10
+    # Character/text repeated for each completed filled segment. Use a short glyph to avoid oversized messages.
+    filled: '▰'
+    # Character/text repeated for each empty segment of the progress bar.
+    empty: '▱'
+    # Decimal places in displayed percentages, 0-3.
+    precision: 1
+    # REMAINING shows time left; ELAPSED shows time used. Does not change actual expiry or balances.
+    source: REMAINING
+  bossbar:
+    # Enable the continuous VIP bossbar server-wide. A player can opt out in /vipmenu. Threshold bossbar reminders are configured separately.
+    enabled: false
+    # Adventure bossbar color: PINK, BLUE, RED, GREEN, YELLOW, PURPLE or WHITE. Also styles threshold bossbars.
+    color: YELLOW
+    # PROGRESS for a smooth bar, or NOTCHED_6, NOTCHED_10, NOTCHED_12, NOTCHED_20.
+    overlay: PROGRESS
+    # World names where live bossbar AND live actionbar may appear. Empty list means all worlds; threshold reminders are separate.
+    worlds: []
+    # Hide the live bossbar when there is no active VIP. False displays the translated no-VIP message at zero progress.
+    hide-when-no-vip: true
+  actionbar:
+    # Enable continuous VIP status above the hotbar, subject to player preference and the live-display world filter.
+    enabled: false
+renewal:
+  # Click behavior on VIP info/login rows: RUN_COMMAND, SUGGEST_COMMAND, or OPEN_URL. URLs must use HTTPS.
+  action: SUGGEST_COMMAND
+  # Command beginning with /, or HTTPS URL for OPEN_URL. Used for click-to-renew messages.
+  value: '/store vip'
+voucher:
+  # Enable signed VIP voucher creation, freezing and redemption.
+  enabled: true
+  # TRANSFERABLE permits any redeemer; OWNER_ONLY binds frozen time to its VIP owner and minted gifts to their recipient. Lore creator labels do not change this.
+  ownership: TRANSFERABLE
+  # RIGHT_CLICK or LEFT_CLICK to redeem a voucher item. Server-side signatures and single-use state are always checked.
+  activation: RIGHT_CLICK
+  # Maximum vouchers per recipient in one item command, 1-64. giveall applies this amount to each online recipient; every voucher has a distinct ID.
+  maximum-amount: 16
+  # Ignore repeated voucher clicks within this many milliseconds, 100-10000.
+  debounce-millis: 500
+  # DEFER queues until space is available; REJECT prechecks self-mint/freeze inventory but targeted/bulk gifts still queue. DROP requires allow-drops=true.
+  inventory-full: DEFER
+  # Permit world item drops for DROP handling. Dropped vouchers can be picked up by other players if transferable.
+  allow-drops: false
+  item:
+    # Valid non-air item Material for vouchers, for example PAPER. Existing voucher identity is stored in persistent item data.
+    material: PAPER
+    # Apply the visual enchantment glint to voucher items.
+    glow: true
+    # ItemFlag enum names to hide item details, for example HIDE_ENCHANTS. Empty list hides nothing.
+    flags: [HIDE_ENCHANTS]
+    # List of finite float strings for modern custom model data, for example ['123.0']. Resource-pack appearance is server-owned.
+    model-data: []
+  freeze:
+    # Smallest remaining VIP balance eligible for freezing, 1-2147483647 seconds.
+    minimum-seconds: 60
+    # Largest remaining balance eligible for freezing, up to 2147483647 seconds and at least the minimum. Excess time is never discarded.
+    maximum-seconds: 315360000
+    # Seconds between successful freezes, 0-2147483647. Zero disables the cooldown.
+    cooldown-seconds: 3600
+    # Permission that bypasses freeze cooldowns; denied by default unless granted explicitly.
+    bypass-permission: vipmanager.cooldown.bypass
+    # Persist freeze cooldowns through reconnects/restarts when true; false uses only the running service state.
+    persist-cooldown: true
+    # World names where freezing is refused. Empty list permits all worlds.
+    disabled-worlds: []
+broadcast:
+  # Local online announcements for selected events: VIP_GRANTED, VIP_EXTENDED, VIP_VOUCHER_REDEEMED, VIP_EXPIRED. Empty list disables broadcasts.
+  events: []
+  # Only online viewers with this permission receive broadcasts. Empty string sends to all online players.
+  permission: ''
+# Enabled throttled diagnostic categories: database, luckperms, commands, vouchers, notifications, discord, placeholders. Empty list disables debug.
+debug: []
+
+# bStats ID 33878. Also respects plugins/bStats/config.yml. Restart to change.
+metrics:
+  enabled: true

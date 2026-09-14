@@ -1,0 +1,245 @@
+# UTF-8 MiniMessage. Keep <placeholders>; prefix affects chat only.
+# owner-* labels describe who created the voucher; redemption restrictions are separate.
+prefix: ''
+error:
+  permission: <#FF7F8A>你没有执行此操作的权限。</#FF7F8A>
+  player-only: <#FF7F8A>此命令需要在线玩家执行。</#FF7F8A>
+  not-ready: <#FF7F8A>VIP存储正在启动，请稍候。</#FF7F8A>
+  busy: <#FF7F8A>待处理操作过多，请稍后重试。</#FF7F8A>
+  internal: '<#FF7F8A>操作未能完成。 • 参考编号: <reference></#FF7F8A>'
+  duration: '<#FF7F8A>时长格式无效。 • <input> • 30d, 12h, 30m, 45s, 7d12h30m • 上限: <maximum> 天</#FF7F8A>'
+  vip: <#FF7F8A>未知的VIP类型。 • <input></#FF7F8A>
+  player: <#FF7F8A>未找到玩家或名称不唯一，请使用UUID。 • <input></#FF7F8A>
+  no-vip: <#FF7F8A>未找到生效中的VIP。 • <player></#FF7F8A>
+  multiple: <#FF7F8A>有多个VIP等级生效，请指定类型。 • <types></#FF7F8A>
+  policy: <#FF7F8A>VIP叠加规则不允许此操作。</#FF7F8A>
+  amount: '<#FF7F8A>兑换券数量无效，至少为1。 • 上限: <maximum></#FF7F8A>'
+  excessive-removal: <#FF7F8A>扣除时间超过剩余VIP时间。</#FF7F8A>
+  freeze-range: <#FF7F8A>VIP时间超出允许的冻结范围。</#FF7F8A>
+  cooldown: <#FF7F8A>距离下次可冻结还剩 • <remaining></#FF7F8A>
+  world: <#FF7F8A>此世界已禁用VIP冻结。</#FF7F8A>
+  inventory: <#FF7F8A>请先清理背包空位。</#FF7F8A>
+  vouchers-disabled: <#FF7F8A>兑换券功能已禁用。</#FF7F8A>
+  voucher-invalid: <#FF7F8A>此兑换券无效或已被修改。</#FF7F8A>
+  voucher-version: <#FF7F8A>不支持此兑换券格式。</#FF7F8A>
+  voucher-used: <#FF7F8A>此兑换券已被使用或撤销。</#FF7F8A>
+  voucher-owner: <#FF7F8A>此兑换券属于其他玩家。</#FF7F8A>
+  reload: <#FF7F8A>配置无效，原设置仍然生效，请检查控制台。</#FF7F8A>
+command:
+  usage: <#F6D365><usage></#F6D365>
+  viptime-usage: /<root> [player] | /<root> <give> <vip-id> <duration> <player> | /<root> <remove> <player> <vip-id> <duration> | /<root> <item> <vip-id>
+    <duration> [amount] | /<root> <item> <item_give> <vip-id> <duration> <player> [amount] | /<root> <item> <item_giveall> <vip-id> <duration> [amount]
+  freeze-usage: /<root> [player vip-id]
+  admin-usage: /<root> <reload> | /<root> <recover> [voucher-uuid] | /<root> <revoke> [voucher-uuid]
+list:
+  row: <#AAB7C4><rank>.</#AAB7C4> <#F3F6FA><player></#F3F6FA> <vip> <#F6D365><remaining></#F6D365>
+  header: '<#FDA085>VIP社区 • 页码: <page></#FDA085>'
+  leaderboard-header: '<#FDA085>VIP排行榜 • 页码: <page></#FDA085>'
+  empty: <#F6D365>本页暂无结果</#F6D365>
+  next: <#F6D365>下一页</#F6D365>
+  previous: <#F6D365>上一页</#F6D365>
+  page-hover: '<#AAB7C4>页码: <page></#AAB7C4>'
+notification:
+  subtitle: <vip> <#AAB7C4>• <remaining></#AAB7C4>
+  login-header: <newline><#FDA085>你的VIP会员</#FDA085><newline><#AAB7C4>欢迎回来, <player></#AAB7C4>
+  login-row: '  ◆ <vip> • <#7EE8B5><remaining></#7EE8B5><newline>     <#AAB7C4>到期时间: <expiry></#AAB7C4>'
+  login-footer: <#536171>点击续费</#536171><newline>
+  chat: '<#F6D365>等级: <vip> • 剩余时间: <remaining> • 到期时间: <expiry></#F6D365>'
+  actionbar: '<vip> • <#AAB7C4>剩余时间: <remaining></#AAB7C4>'
+  bossbar: '<vip> • 剩余时间: <remaining>'
+  title: <#FDA085>到期时间</#FDA085>
+display:
+  bossbar: <vip> • <remaining> • <percentage>%
+  actionbar: <vip> <#AAB7C4><progressbar> <remaining></#AAB7C4>
+  no-vip: <#AAB7C4>未找到生效中的VIP。</#AAB7C4>
+placeholder:
+  none: ''
+  'true': 'true'
+  'false': 'false'
+  progressbar: <#7EE8B5><filled></#7EE8B5><#536171><empty></#536171>
+duration:
+  separator: ' '
+  short:
+    day:
+      one: <value> 天
+      many: <value> 天
+    hour:
+      one: <value> 小时
+      many: <value> 小时
+    minute:
+      one: <value> 分钟
+      many: <value> 分钟
+    second:
+      one: <value> 秒
+      many: <value> 秒
+  long:
+    day:
+      one: <value> 天
+      many: <value> 天
+    hour:
+      one: <value> 小时
+      many: <value> 小时
+    minute:
+      one: <value> 分钟
+      many: <value> 分钟
+    second:
+      one: <value> 秒
+      many: <value> 秒
+discord:
+  title: <action>
+  description: '操作者: <actor> (<actor_uuid>)\n玩家: <player> (<uuid>)\nVIP: <vip>\n秒: <duration_seconds>\n原到期时间: <previous>\n新到期时间: <expiry>\n兑换券: <voucher>\n参考编号:
+    <reference>'
+menu:
+  filler:
+    name: ' '
+    lore: []
+  personal:
+    profile:
+      name: <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>个人VIP资料</#536171>
+      - ''
+      - '<#AAB7C4>生效中的VIP等级: <count></#AAB7C4>'
+      - <#AAB7C4>通知设置</#AAB7C4>
+      - <#536171>偏好已永久保存</#536171>
+    vip:
+      name: <vip>
+      lore:
+      - <#536171>生效中的VIP等级</#536171>
+      - ''
+      - '<#7EE8B5>剩余时间: <remaining></#7EE8B5>'
+      - '<#AAB7C4>到期时间: <expiry></#AAB7C4>'
+      - '<#F6D365>进度: <percentage>%</#F6D365>'
+    inventory-title: <#FDA085>我的VIP面板</#FDA085> • <page>
+    bossbar:
+      name: <#C9ACFF>Boss栏通知</#C9ACFF>
+      lore:
+      - <#AAB7C4>点击切换此显示选项</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>此显示也必须在服务器设置中开启</#536171>
+    actionbar:
+      name: <#C9ACFF>快捷栏上方通知</#C9ACFF>
+      lore:
+      - <#AAB7C4>点击切换此显示选项</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>此显示也必须在服务器设置中开启</#536171>
+    title:
+      name: <#C9ACFF>屏幕标题通知</#C9ACFF>
+      lore:
+      - <#AAB7C4>点击切换此显示选项</#AAB7C4>
+      - ''
+      - <#F6D365><state></#F6D365>
+      - <#536171>聊天提醒仍然可用</#536171>
+  list:
+    entry:
+      name: <#536171>#<rank></#536171> <#F3F6FA><bold><player></bold></#F3F6FA>
+      lore:
+      - <#536171>生效中的VIP等级</#536171>
+      - ''
+      - '<#AAB7C4>等级: <vip></#AAB7C4>'
+      - '<#7EE8B5>剩余时间: <remaining></#7EE8B5>'
+      - '<#AAB7C4>到期时间: <expiry></#AAB7C4>'
+      - '<#7DDDE8>状态: <status></#7DDDE8>'
+    title: <#7DDDE8>VIP社区</#7DDDE8> • <page>
+  leaderboard:
+    entry:
+      name: <#F6D365><bold>#<rank></bold></#F6D365> <#F3F6FA><player></#F3F6FA>
+      lore:
+      - <#536171>VIP排行榜</#536171>
+      - ''
+      - '<#AAB7C4>等级: <vip></#AAB7C4>'
+      - <#F6D365><ranking> • <score></#F6D365>
+      - '<#7EE8B5>剩余时间: <remaining></#7EE8B5>'
+      - '<#7DDDE8>状态: <status></#7DDDE8>'
+      - <#536171>剩余VIP总时长</#536171>
+    title: <#FDA085>VIP排行榜</#FDA085> • <page>
+  disabled: <#FF7F8A>服务器已禁用此菜单</#FF7F8A>
+  enabled: 已开启 — 点击关闭
+  disabled-state: 已关闭 — 点击开启
+  online: 在线
+  offline: 离线
+  saved: <#7EE8B5>通知设置 • 偏好已永久保存</#7EE8B5>
+  ranking:
+    remaining: 剩余VIP总时长
+    historical: 历史累计VIP时长
+    expiration: 最晚到期时间
+  loading:
+    name: <#F6D365>正在加载VIP数据…</#F6D365>
+    lore:
+    - <#AAB7C4>正在加载VIP数据…</#AAB7C4>
+  empty:
+    name: <#F6D365>本页暂无结果</#F6D365>
+    lore:
+    - <#AAB7C4>本页暂无结果</#AAB7C4>
+  close:
+    name: <#F6D365>关闭</#F6D365>
+    lore:
+    - <#AAB7C4>关闭</#AAB7C4>
+  home:
+    name: <#F6D365>我的VIP面板</#F6D365>
+    lore:
+    - <#AAB7C4>我的VIP面板</#AAB7C4>
+  previous:
+    name: <#F6D365>上一页</#F6D365>
+    lore:
+    - '<#AAB7C4>页码: <page></#AAB7C4>'
+  next:
+    name: <#F6D365>下一页</#F6D365>
+    lore:
+    - <#AAB7C4>下一页</#AAB7C4>
+  open-list:
+    name: <#F6D365>VIP社区</#F6D365>
+    lore:
+    - <#AAB7C4>VIP社区</#AAB7C4>
+  open-leaderboard:
+    name: <#F6D365>VIP排行榜</#F6D365>
+    lore:
+    - <#AAB7C4>VIP排行榜</#AAB7C4>
+vip:
+  info: '<#AAB7C4>玩家: <player> • 等级: <vip> • 剩余时间: <remaining> • 到期时间: <expiry> • 进度: <percentage>%</#AAB7C4>'
+  hover: '<#F6D365>点击续费</#F6D365><newline>天: <days> • 小时: <hours> • 分钟: <minutes> • 秒: <seconds>'
+  granted: '<#7EE8B5>已发放VIP时间 • 玩家: <player> • 等级: <vip> • 时长: <duration></#7EE8B5>'
+  removed: '<#7EE8B5>已扣除VIP时间 • 玩家: <player> • 等级: <vip> • 时长: <duration></#7EE8B5>'
+  frozen: '<#7EE8B5>VIP时间已冻结 • 玩家: <player> • 等级: <vip> • 剩余时间: <remaining> • 兑换券: <voucher></#7EE8B5>'
+  expired: <#F6D365><vip> • VIP已到期</#F6D365>
+  none: 无
+voucher:
+  created: '<#7EE8B5>兑换券已创建 • 数量: <amount> • 等待背包有空位后发放</#7EE8B5>'
+  redeemed: '<#7EE8B5>兑换券已使用 • 等级: <vip> • 时长: <duration></#7EE8B5>'
+  delivered: <#7EE8B5>兑换券已送达</#7EE8B5>
+  deferred: <#7EE8B5>等待背包有空位后发放</#7EE8B5>
+  recovered: <#F6D365>恢复已排队；所有副本合计只能兑换一次 • <voucher></#F6D365>
+  revoked: <#F6D365>兑换券已撤销；所有副本均已失效 • <voucher></#F6D365>
+  name: <#FDA085><vip> • 兑换券</#FDA085>
+  lore:
+  - '<#AAB7C4>时长: <duration></#AAB7C4>'
+  - '<#AAB7C4>所有者: <owner></#AAB7C4>'
+  - '<#AAB7C4>可兑换者: <redeemer></#AAB7C4>'
+  - <#F6D365>使用此物品兑换</#F6D365>
+  - '<#536171>ID: <voucher></#536171>'
+  transferable: 任何人
+  owner-admin: 管理员
+  owner-console: 控制台
+  owner-player: <player>
+  gifted: <#7EE8B5>已为 <players> 位玩家排队发放 <amount> 张兑换券。</#7EE8B5>
+reload:
+  success: <#7EE8B5>配置已重新加载</#7EE8B5>
+  restart: <#F6D365>配置已重新加载 • 命令、数据库及网络设置更改需要重启</#F6D365>
+gui:
+  title: <#FDA085>你的VIP会员</#FDA085>
+  url: <#F6D365>打开VIP商店</#F6D365>
+  renew:
+    name: <#7EE8B5>点击续费</#7EE8B5>
+    lore:
+    - <#AAB7C4>打开VIP商店</#AAB7C4>
+  close:
+    name: <#FF7F8A>关闭</#FF7F8A>
+    lore:
+    - <#AAB7C4>关闭</#AAB7C4>
+broadcast:
+  VIP_GRANTED: <#FDA085><player> • <vip> • 已发放VIP时间</#FDA085>
+  VIP_EXTENDED: <#FDA085><player> • <vip> • VIP已延长</#FDA085>
+  VIP_VOUCHER_REDEEMED: <#FDA085><player> • <vip> • 兑换券已使用</#FDA085>
+  VIP_EXPIRED: <#FDA085><player> • <vip> • VIP已到期</#FDA085>
